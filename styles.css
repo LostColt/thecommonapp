@@ -1,0 +1,57 @@
+:root {
+    --gulliver-navy: #003057;
+    --gulliver-blue: #00338D;
+    --gulliver-light: #E2E8F0;
+    --gulliver-accent: #38BDF8;
+    --text-primary: #1E293B;
+    --text-secondary: #64748B;
+    --bg-primary: #F8FAFC;
+    --bg-card: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+
+.page-wrapper { display: flex; min-height: 100vh; }
+.main-content { flex: 1; max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+@media (min-width: 1024px) { .main-content { margin-left: 320px; padding: 6rem 4rem; } }
+
+.sidebar { display: none; position: fixed; top: 0; left: 0; width: 300px; height: 100vh; background: var(--gulliver-navy); color: white; padding: 3rem 2rem; overflow-y: auto; z-index: 40; }
+@media (min-width: 1024px) { .sidebar { display: block; } }
+.sidebar.mobile-open { display: block; }
+
+.sidebar-brand { margin-bottom: 3rem; }
+.sidebar-brand h1 { font-size: 1.875rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+.sidebar-brand-divider { height: 4px; width: 3rem; background: #CBD5E1; margin-bottom: 1rem; }
+.sidebar-brand-subtitle { font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.25em; color: #93C5FD; font-weight: 700; }
+
+.sidebar-nav { list-style: none; padding-left: 1rem; }
+.sidebar-nav li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; }
+.sidebar-nav a { color: rgba(147, 197, 253, 0.6); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: all 0.3s; }
+.sidebar-nav a:hover, .sidebar-nav a.active { color: white; transform: translateX(4px); }
+.sidebar-nav li.active::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 8px; height: 8px; background: #CBD5E1; border-radius: 50%; }
+
+.mobile-header { display: flex; align-items: center; gap: 1rem; background: var(--gulliver-navy); color: white; padding: 1rem 1.5rem; position: sticky; top: 0; z-index: 30; }
+@media (min-width: 1024px) { .mobile-header { display: none; } }
+.mobile-menu-btn { background: none; border: none; color: white; cursor: pointer; font-size: 1.5rem; }
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 35; }
+.mobile-overlay.active { display: block; }
+
+.progress-bar { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(0,0,0,0.1); z-index: 50; }
+.progress-bar-fill { height: 100%; background: linear-gradient(to right, var(--gulliver-navy), var(--gulliver-blue)); width: 0%; transition: width 0.1s; }
+
+.page-title { font-size: 2.5rem; font-weight: 700; color: var(--gulliver-navy); margin-bottom: 1rem; line-height: 1.1; }
+@media (min-width: 768px) { .page-title { font-size: 3.5rem; } }
+.page-subtitle { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 3rem; max-width: 600px; }
+
+.prose { color: var(--text-secondary); font-size: 1.0625rem; line-height: 1.8; }
+.prose p { margin-bottom: 1.5rem; }
+.prose strong { color: var(--gulliver-navy); font-weight: 600; }
+.prose h2 { font-size: 1.75rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
+.prose h3 { font-size: 1.25rem; color: var(--gulliver-navy); margin: 2rem 0 0.75rem; }
+.prose ul, .prose ol { margin: 1.5rem 0; padding-left: 1.5rem; }
+.prose li { margin-bottom: 0.75rem; }
+.prose blockquote { border-left: 4px solid var(--gulliver-navy); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
+.prose hr { border: none; height: 1px; background: #E2E8F0; margin: 3rem 0; }
