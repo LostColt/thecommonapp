@@ -1,4 +1,4 @@
-name: Build from Notion
+name: Build and Deploy
 
 on:
   workflow_dispatch:
@@ -9,27 +9,28 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
 
-      - name: Fetch from Notion and build
+      - name: Build site
         env:
-          NOTION_API_KEY: $ secrets.NOTION_API_KEY 
-          NOTION_DATABASE_ID: $ secrets.NOTION_DATABASE_ID 
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: node build.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
-          branch: gh-pages
+          folder: dist # The folder the build script generates
+          branch: gh-pages # The branch the action should deploy to
