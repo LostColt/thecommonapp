@@ -19,7 +19,7 @@ function renderSidebar(currentPage) {
         navHtml += '<li class="' + (isActive ? 'active' : '') + '">';
         navHtml += '<a href="' + item.href + '" class="' + (isActive ? 'active' : '') + '">' + item.label + '</a></li>';
     }
-    sidebar.innerHTML = '<div class="sidebar-brand"><h1>Gulliver<br>Prep</h1><div class="sidebar-brand-divider"></div><p class="sidebar-brand-subtitle">College Essay</p><p class="sidebar-brand-subtitle">Guide 2026-27</p></div><ul class="sidebar-nav">' + navHtml + '</ul>';
+    sidebar.innerHTML = '<div class="sidebar-brand"><h1>Gulliver<br>Prep</h1><div class="sidebar-brand-divider"></div><p class="sidebar-brand-subtitle">College Essay</p><p class="sidebar-brand-subtitle">Guide 2026-27</p></div><ul class="sidebar-nav">' + navHtml + '</ul><div class="sidebar-footer"><p class="sidebar-footer-name">David Tran</p><p class="sidebar-footer-title">College Essay Writing Coach</p><a href="mailto:dtran@gulliverprep.org" class="sidebar-footer-email">dtran@gulliverprep.org</a></div>';
 }
 
 function initProgressBar() {
