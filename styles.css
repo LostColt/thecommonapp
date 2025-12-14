@@ -49,9 +49,29 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .prose { color: var(--text-secondary); font-size: 1.0625rem; line-height: 1.8; }
 .prose p { margin-bottom: 1.5rem; }
 .prose strong { color: var(--gulliver-navy); font-weight: 600; }
+.prose h1 { font-size: 2rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
 .prose h2 { font-size: 1.75rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
 .prose h3 { font-size: 1.25rem; color: var(--gulliver-navy); margin: 2rem 0 0.75rem; }
 .prose ul, .prose ol { margin: 1.5rem 0; padding-left: 1.5rem; }
 .prose li { margin-bottom: 0.75rem; }
+.prose ol { list-style-type: decimal; }
 .prose blockquote { border-left: 4px solid var(--gulliver-navy); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text-primary); }
 .prose hr { border: none; height: 1px; background: #E2E8F0; margin: 3rem 0; }
+.prose a { color: var(--gulliver-blue); text-decoration: underline; transition: color 0.2s; }
+.prose a:hover { color: var(--gulliver-navy); }
+
+.callout { display: flex; gap: 1rem; padding: 1.25rem 1.5rem; background: var(--gulliver-light); border-radius: 0.75rem; margin: 2rem 0; }
+.callout-icon { font-size: 1.5rem; flex-shrink: 0; }
+.callout-content { flex: 1; color: var(--text-primary); }
+.callout-content p { margin: 0; }
+
+.prose pre { background: #1E293B; color: #E2E8F0; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin: 2rem 0; font-family: monospace; font-size: 0.875rem; line-height: 1.6; }
+.prose code { font-family: monospace; font-size: 0.875em; }
+.prose p code, .prose li code { background: var(--gulliver-light); padding: 0.2em 0.4em; border-radius: 0.25rem; color: var(--gulliver-navy); }
+
+.prose figure { margin: 2rem 0; }
+.prose figure img { width: 100%; height: auto; border-radius: 0.75rem; }
+.prose figcaption { text-align: center; font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.75rem; font-style: italic; }
+
+.prose del { text-decoration: line-through; color: var(--text-secondary); }
+.prose u { text-decoration: underline; }
