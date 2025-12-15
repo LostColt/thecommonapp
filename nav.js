@@ -48,7 +48,44 @@ function initMobileMenu() {
 }
 
 // =========================================================================
-// NEW CODE: DYNAMIC CONTENT LOADER AND FOCUS CAROUSEL LOGIC
+// NEW CODE: PROMPTS ACCORDION LOGIC
+// =========================================================================
+
+function initPromptsAccordion() {
+    const accordion = document.getElementById('commonAppPrompts');
+    if (!accordion) return;
+
+    accordion.addEventListener('click', function(event) {
+        const header = event.target.closest('.accordion-header');
+        if (!header) return;
+
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        const targetId = header.dataset.target;
+        const body = document.getElementById(targetId);
+
+        // Close all other open panels (optional: remove this loop to allow multiple panels open)
+        accordion.querySelectorAll('.accordion-header[aria-expanded="true"]').forEach(openHeader => {
+            if (openHeader !== header) {
+                openHeader.setAttribute('aria-expanded', 'false');
+                document.getElementById(openHeader.dataset.target).classList.remove('is-open');
+            }
+        });
+        
+        // Toggle the clicked panel
+        if (isExpanded) {
+            header.setAttribute('aria-expanded', 'false');
+            body.classList.remove('is-open');
+        } else {
+            header.setAttribute('aria-expanded', 'true');
+            body.classList.add('is-open');
+        }
+    });
+}
+
+
+// =========================================================================
+// EXISTING CODE: DYNAMIC CONTENT LOADER AND FOCUS CAROUSEL LOGIC
+// (Note: Retained for the 'moves.html' page functionality)
 // =========================================================================
 
 // *** REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL RAW GITHUB URL ***
@@ -60,7 +97,6 @@ function setupFocusCarousel() {
 
     if (!slides.length || !container) return; 
 
-    // Intersection Observer configuration for centering the focus
     const options = {
         root: container,
         threshold: 0.5,
@@ -85,11 +121,7 @@ function setupFocusCarousel() {
 
 function loadSlideContent() {
     const contentContainer = document.getElementById('slideDeckWrapper');
-
-    if (!contentContainer) {
-        console.warn("Target container #slideDeckWrapper not found. Cannot load slides.");
-        return;
-    }
+    if (!contentContainer) return;
 
     fetch(SLIDE_CONTENT_URL)
         .then(response => {
@@ -99,10 +131,7 @@ function loadSlideContent() {
             return response.text();
         })
         .then(htmlContent => {
-            // 1. Inject the fetched HTML content
             contentContainer.innerHTML = htmlContent;
-            
-            // 2. Initialize the carousel ONLY after the HTML is in the DOM
             setupFocusCarousel();
         })
         .catch(error => {
@@ -125,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initProgressBar();
     initMobileMenu();
     
-    // Call the function to load and initialize the slides
+    // Initialize both interactive components
     loadSlideContent(); 
+    initPromptsAccordion();
 });
