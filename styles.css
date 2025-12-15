@@ -83,70 +83,111 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .prose u { text-decoration: underline; }
 
 /* ------------------------------------------- */
-/* START: UPDATED Slide Deck Styles for Scrolling Focus */
+/* START: PROMPTS ACCORDION STYLES */
+/* ------------------------------------------- */
+
+.prompts-accordion {
+    margin: 3rem 0;
+    border: 1px solid var(--gulliver-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.accordion-item {
+    border-bottom: 1px solid var(--gulliver-light);
+}
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    width: 100%;
+    text-align: left;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-card);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gulliver-navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+.accordion-header:hover, .accordion-header[aria-expanded="true"] {
+    background-color: var(--gulliver-light);
+}
+
+.prompt-number {
+    font-weight: bold;
+    color: var(--gulliver-accent);
+    margin-right: 10px;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: var(--gulliver-accent);
+    transform: rotate(0deg);
+    transition: transform 0.3s;
+    line-height: 1; /* Fix vertical alignment */
+}
+
+.accordion-header[aria-expanded="true"] .accordion-icon {
+    transform: rotate(45deg); 
+}
+
+.accordion-body {
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    background: var(--bg-card);
+    padding: 0 1.5rem;
+}
+
+.accordion-body.is-open {
+    max-height: 600px; 
+    padding: 1rem 1.5rem 1.5rem; 
+}
+
+.accordion-body p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+.accordion-body p:last-child {
+    margin-bottom: 0;
+}
+.accordion-body p strong {
+    color: var(--gulliver-navy);
+}
+
+/* ------------------------------------------- */
+/* EXISTING SLIDE DECK STYLES (Retained for moves.html) */
 /* ------------------------------------------- */
 .slide-deck { margin: 3rem 0; }
-
-/* 1. Hide the old navigation elements */
-.slide-deck-nav,
-.slide-deck-controls {
-    display: none;
-}
-
-/* 2. Slide Deck Container (The Scrollable Window) */
+.slide-deck-nav, .slide-deck-controls { display: none; }
 .slide-deck-container {
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    scroll-snap-type: x mandatory; /* Snap scroll position to slides */
-    
-    position: relative; 
-    border-radius: 1rem; 
-    background: white; 
-    box-shadow: 0 10px 40px rgba(0,48,87,0.1);
-    padding-top: 50px; 
-    padding-bottom: 50px; 
-    cursor: grab;
+    overflow-x: scroll; -ms-overflow-style: none; scrollbar-width: none; scroll-snap-type: x mandatory; 
+    position: relative; border-radius: 1rem; background: white; box-shadow: 0 10px 40px rgba(0,48,87,0.1);
+    padding-top: 50px; padding-bottom: 50px; cursor: grab;
 }
-.slide-deck-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari */
-}
-
-/* 3. Slide Deck Track */
+.slide-deck-container::-webkit-scrollbar { display: none; }
 .slide-deck-track {
-    display: flex;
-    white-space: nowrap; 
-    height: 70vh; 
-    align-items: center; 
+    display: flex; white-space: nowrap; height: 70vh; align-items: center; 
 }
-
-/* 4. Individual Slide Styling (Base State) */
 .slide {
-    width: 350px;
-    min-width: 350px; 
-    height: 450px;
-    
-    margin: 0 30px; 
-    white-space: normal; 
-    flex-shrink: 0; 
-    
-    scroll-snap-align: center;
-    
-    /* Initial small scale and transition */
-    transform: scale(0.85); 
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-
-    padding: 3rem; 
-    background: white;
+    width: 350px; min-width: 350px; height: 450px; margin: 0 30px; 
+    white-space: normal; flex-shrink: 0; scroll-snap-align: center;
+    transform: scale(0.85); transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+    padding: 3rem; background: white;
 }
-
-/* 5. Focused State (The Scaling Effect) */
 .slide.is-focused {
-    transform: scale(1.05); 
-    box-shadow: 0 20px 50px rgba(0,48,87,0.25); 
+    transform: scale(1.05); box-shadow: 0 20px 50px rgba(0,48,87,0.25); 
 }
-
-/* Existing slide content styles remain */
 .slide-number { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gulliver-accent); font-weight: 700; margin-bottom: 1rem; }
 .slide-title { font-size: 1.75rem; font-family: 'Playfair Display', serif; color: var(--gulliver-navy); margin-bottom: 1rem; line-height: 1.2; }
 .slide-content { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
@@ -154,7 +195,3 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .slide-example { background: var(--gulliver-light); padding: 1.25rem; border-radius: 0.5rem; margin-top: 1.5rem; border-left: 4px solid var(--gulliver-navy); }
 .slide-example-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gulliver-navy); font-weight: 700; margin-bottom: 0.5rem; }
 .slide-example-text { font-style: italic; color: var(--text-primary); }
-
-/* ------------------------------------------- */
-/* END: UPDATED Slide Deck Styles for Scrolling Focus */
-/* ------------------------------------------- */
