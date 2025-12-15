@@ -2,7 +2,7 @@
     --gulliver-navy: #003057;
     --gulliver-blue: #00338D;
     --gulliver-light: #E2E8F0;
-    --gulliver-accent: #38BDF8;
+    --gulliver-accent: #38BDF8; /* Light Blue Accent */
     --text-primary: #1E293B;
     --text-secondary: #64748B;
     --bg-primary: #F8FAFC;
@@ -11,7 +11,12 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+body { 
+    font-family: 'Inter', sans-serif; 
+    background: var(--bg-primary); 
+    color: var(--text-primary); 
+    line-height: 1.6; 
+}
 h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 
 .page-wrapper { display: flex; min-height: 100vh; }
@@ -27,11 +32,61 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .sidebar-brand-divider { height: 4px; width: 3rem; background: #CBD5E1; margin-bottom: 1rem; }
 .sidebar-brand-subtitle { font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.25em; color: #93C5FD; font-weight: 700; }
 
-.sidebar-nav { list-style: none; padding-left: 1rem; flex: 1; }
-.sidebar-nav li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; }
-.sidebar-nav a { color: rgba(147, 197, 253, 0.6); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: all 0.3s; }
-.sidebar-nav a:hover, .sidebar-nav a.active { color: white; transform: translateX(4px); }
-.sidebar-nav li.active::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 8px; height: 8px; background: #CBD5E1; border-radius: 50%; }
+/* --- UPDATED NAV STYLES --- */
+.sidebar-nav { 
+    list-style: none; 
+    padding-left: 1rem; 
+    flex: 1; 
+    border-left: 1px solid rgba(56, 189, 248, 0.2); /* Blue Line */
+    margin-left: 0.5rem; 
+}
+
+.sidebar-nav li { 
+    position: relative; 
+    padding-left: 1.5rem; 
+    margin-bottom: 1rem; 
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    transition: background-color 0.3s;
+}
+
+.sidebar-nav a { 
+    color: rgba(147, 197, 253, 0.6); 
+    text-decoration: none; 
+    font-size: 0.875rem; 
+    font-weight: 500; 
+    display: inline-block;
+    padding-left: 5px; 
+    transition: all 0.3s, color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav li:hover a {
+    color: white;
+}
+.sidebar-nav li.active {
+    background-color: rgba(56, 189, 248, 0.1); 
+    border-radius: 4px;
+}
+.sidebar-nav a.active { 
+    color: white; 
+    transform: translateX(4px); 
+}
+
+.sidebar-nav li.active::before { /* The Moving White Dot */
+    content: ''; 
+    position: absolute; 
+    left: -7px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 10px; 
+    height: 10px; 
+    background: white; 
+    box-shadow: 0 0 0 3px var(--gulliver-navy); 
+    border-radius: 50%; 
+    z-index: 10;
+}
+/* -------------------------- */
+
 
 .sidebar-footer { margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
 .sidebar-footer-name { font-weight: 600; font-size: 0.875rem; color: white; margin-bottom: 0.25rem; }
@@ -50,14 +105,29 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 
 .page-title { font-size: 2.5rem; font-weight: 700; color: var(--gulliver-navy); margin-bottom: 1rem; line-height: 1.1; }
 @media (min-width: 768px) { .page-title { font-size: 3.5rem; } }
-.page-subtitle { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 3rem; max-width: 600px; }
+
+/* FONT: Subtitle uses Fira Sans */
+.page-subtitle { 
+    font-family: 'Fira Sans', sans-serif; 
+    font-size: 1.125rem; 
+    color: var(--text-secondary); 
+    margin-bottom: 3rem; 
+    max-width: 600px; 
+}
 
 .prose { color: var(--text-secondary); font-size: 1.0625rem; line-height: 1.8; }
 .prose p { margin-bottom: 1.5rem; }
 .prose strong { color: var(--gulliver-navy); font-weight: 600; }
 .prose h1 { font-size: 2rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
 .prose h2 { font-size: 1.75rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
-.prose h3 { font-size: 1.25rem; color: var(--gulliver-navy); margin: 2rem 0 0.75rem; }
+/* FONT: Prose H3 uses Fira Sans */
+.prose h3 { 
+    font-family: 'Fira Sans', sans-serif; 
+    font-size: 1.25rem; 
+    color: var(--gulliver-navy); 
+    margin: 2rem 0 0.75rem; 
+    font-weight: 600;
+}
 .prose ul, .prose ol { margin: 1.5rem 0; padding-left: 1.5rem; }
 .prose li { margin-bottom: 0.75rem; }
 .prose ol { list-style-type: decimal; }
@@ -82,16 +152,14 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .prose del { text-decoration: line-through; color: var(--text-secondary); }
 .prose u { text-decoration: underline; }
 
-/* ------------------------------------------- */
-/* START: PROMPTS TABLE STYLES (NEW) */
-/* ------------------------------------------- */
+/* --- PROMPTS TABLE STYLES --- */
 .prompts-table-container {
     margin: 3rem 0;
     overflow-x: auto; 
     box-shadow: 0 4px 20px rgba(0, 48, 87, 0.08); 
     border-radius: 8px;
 }
-
+/* ... (rest of the table styles are included below) ... */
 .prompts-table {
     width: 100%;
     border-collapse: collapse;
@@ -99,14 +167,14 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
     line-height: 1.5;
     background: var(--bg-card);
 }
-
+/* ... (rest of the table styles) ... */
 .prompts-table th, .prompts-table td {
     padding: 1.25rem 1.5rem;
     border: 1px solid var(--gulliver-light);
     vertical-align: top;
     text-align: left;
 }
-
+/* ... (rest of the table styles) ... */
 .prompts-table thead th {
     background: var(--gulliver-navy);
     color: white;
@@ -141,13 +209,9 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
     color: var(--gulliver-accent);
 }
 /* ------------------------------------------- */
-/* END: PROMPTS TABLE STYLES */
-/* ------------------------------------------- */
 
 
-/* ------------------------------------------- */
-/* START: Slide Deck Styles (Retained for moves.html) */
-/* ------------------------------------------- */
+/* --- Slide Deck Styles (for moves.html) --- */
 .slide-deck { margin: 3rem 0; }
 .slide-deck-nav, .slide-deck-controls { display: none; }
 .slide-deck-container {
@@ -155,19 +219,23 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
     position: relative; border-radius: 1rem; background: white; box-shadow: 0 10px 40px rgba(0,48,87,0.1);
     padding-top: 50px; padding-bottom: 50px; cursor: grab;
 }
+/* ... (rest of the slide deck styles) ... */
 .slide-deck-container::-webkit-scrollbar { display: none; }
 .slide-deck-track {
     display: flex; white-space: nowrap; height: 70vh; align-items: center; 
 }
+/* ... (rest of the slide deck styles) ... */
 .slide {
     width: 350px; min-width: 350px; height: 450px; margin: 0 30px; 
     white-space: normal; flex-shrink: 0; scroll-snap-align: center;
     transform: scale(0.85); transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
     padding: 3rem; background: white;
 }
+/* ... (rest of the slide deck styles) ... */
 .slide.is-focused {
     transform: scale(1.05); box-shadow: 0 20px 50px rgba(0,48,87,0.25); 
 }
+/* ... (rest of the slide deck styles) ... */
 .slide-number { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gulliver-accent); font-weight: 700; margin-bottom: 1rem; }
 .slide-title { font-size: 1.75rem; font-family: 'Playfair Display', serif; color: var(--gulliver-navy); margin-bottom: 1rem; line-height: 1.2; }
 .slide-content { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
@@ -175,6 +243,3 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .slide-example { background: var(--gulliver-light); padding: 1.25rem; border-radius: 0.5rem; margin-top: 1.5rem; border-left: 4px solid var(--gulliver-navy); }
 .slide-example-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gulliver-navy); font-weight: 700; margin-bottom: 0.5rem; }
 .slide-example-text { font-style: italic; color: var(--text-primary); }
-/* ------------------------------------------- */
-/* END: Slide Deck Styles */
-/* ------------------------------------------- */
