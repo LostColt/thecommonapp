@@ -83,90 +83,70 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .prose u { text-decoration: underline; }
 
 /* ------------------------------------------- */
-/* START: PROMPTS ACCORDION STYLES */
+/* START: PROMPTS TABLE STYLES (NEW) */
 /* ------------------------------------------- */
-
-.prompts-accordion {
+.prompts-table-container {
     margin: 3rem 0;
-    border: 1px solid var(--gulliver-light);
+    overflow-x: auto; 
+    box-shadow: 0 4px 20px rgba(0, 48, 87, 0.08); 
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
-.accordion-item {
-    border-bottom: 1px solid var(--gulliver-light);
-}
-.accordion-item:last-child {
-    border-bottom: none;
-}
-
-.accordion-header {
+.prompts-table {
     width: 100%;
-    text-align: left;
-    padding: 1.25rem 1.5rem;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.5;
     background: var(--bg-card);
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
+}
+
+.prompts-table th, .prompts-table td {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--gulliver-light);
+    vertical-align: top;
+    text-align: left;
+}
+
+.prompts-table thead th {
+    background: var(--gulliver-navy);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+}
+
+.prompts-table tbody tr:nth-child(even) {
+    background-color: var(--gulliver-light); 
+}
+
+.prompt-number-col {
+    width: 25%;
     font-weight: 600;
     color: var(--gulliver-navy);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s;
-}
-.accordion-header:hover, .accordion-header[aria-expanded="true"] {
-    background-color: var(--gulliver-light);
 }
 
-.prompt-number {
-    font-weight: bold;
-    color: var(--gulliver-accent);
-    margin-right: 10px;
-}
-
-.accordion-icon {
-    font-size: 1.5rem;
-    font-weight: normal;
-    color: var(--gulliver-accent);
-    transform: rotate(0deg);
-    transition: transform 0.3s;
-    line-height: 1; /* Fix vertical alignment */
-}
-
-.accordion-header[aria-expanded="true"] .accordion-icon {
-    transform: rotate(45deg); 
-}
-
-.accordion-body {
-    max-height: 0; 
-    overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-    background: var(--bg-card);
-    padding: 0 1.5rem;
-}
-
-.accordion-body.is-open {
-    max-height: 600px; 
-    padding: 1rem 1.5rem 1.5rem; 
-}
-
-.accordion-body p {
-    margin-bottom: 1rem;
+.prompt-text {
+    font-style: italic;
+    font-size: 0.85rem;
     color: var(--text-secondary);
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-.accordion-body p:last-child {
+    margin-top: 0.5rem;
     margin-bottom: 0;
 }
-.accordion-body p strong {
-    color: var(--gulliver-navy);
+
+.key-insight-col {
+    width: 40%;
 }
+.key-insight-col strong {
+    color: var(--gulliver-accent);
+}
+/* ------------------------------------------- */
+/* END: PROMPTS TABLE STYLES */
+/* ------------------------------------------- */
+
 
 /* ------------------------------------------- */
-/* EXISTING SLIDE DECK STYLES (Retained for moves.html) */
+/* START: Slide Deck Styles (Retained for moves.html) */
 /* ------------------------------------------- */
 .slide-deck { margin: 3rem 0; }
 .slide-deck-nav, .slide-deck-controls { display: none; }
@@ -195,3 +175,6 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .slide-example { background: var(--gulliver-light); padding: 1.25rem; border-radius: 0.5rem; margin-top: 1.5rem; border-left: 4px solid var(--gulliver-navy); }
 .slide-example-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gulliver-navy); font-weight: 700; margin-bottom: 0.5rem; }
 .slide-example-text { font-style: italic; color: var(--text-primary); }
+/* ------------------------------------------- */
+/* END: Slide Deck Styles */
+/* ------------------------------------------- */
