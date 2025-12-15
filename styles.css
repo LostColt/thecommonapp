@@ -106,9 +106,9 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .page-title { font-size: 2.5rem; font-weight: 700; color: var(--gulliver-navy); margin-bottom: 1rem; line-height: 1.1; }
 @media (min-width: 768px) { .page-title { font-size: 3.5rem; } }
 
-/* FONT: Subtitle uses Fira Sans */
+/* FONT: Subtitle uses Fira Sans - FORCED */
 .page-subtitle { 
-    font-family: 'Fira Sans', sans-serif; 
+    font-family: 'Fira Sans', sans-serif !important; /* !important added for guaranteed loading */
     font-size: 1.125rem; 
     color: var(--text-secondary); 
     margin-bottom: 3rem; 
@@ -120,9 +120,10 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
 .prose strong { color: var(--gulliver-navy); font-weight: 600; }
 .prose h1 { font-size: 2rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
 .prose h2 { font-size: 1.75rem; color: var(--text-primary); margin: 2.5rem 0 1rem; font-family: 'Playfair Display', serif; }
-/* FONT: Prose H3 uses Fira Sans */
+
+/* FONT: Prose H3 uses Fira Sans - FORCED */
 .prose h3 { 
-    font-family: 'Fira Sans', sans-serif; 
+    font-family: 'Fira Sans', sans-serif !important; /* !important added for guaranteed loading */
     font-size: 1.25rem; 
     color: var(--gulliver-navy); 
     margin: 2rem 0 0.75rem; 
@@ -159,7 +160,6 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
     box-shadow: 0 4px 20px rgba(0, 48, 87, 0.08); 
     border-radius: 8px;
 }
-/* ... (rest of the table styles are included below) ... */
 .prompts-table {
     width: 100%;
     border-collapse: collapse;
@@ -167,14 +167,12 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
     line-height: 1.5;
     background: var(--bg-card);
 }
-/* ... (rest of the table styles) ... */
 .prompts-table th, .prompts-table td {
     padding: 1.25rem 1.5rem;
     border: 1px solid var(--gulliver-light);
     vertical-align: top;
     text-align: left;
 }
-/* ... (rest of the table styles) ... */
 .prompts-table thead th {
     background: var(--gulliver-navy);
     color: white;
@@ -219,23 +217,19 @@ h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
     position: relative; border-radius: 1rem; background: white; box-shadow: 0 10px 40px rgba(0,48,87,0.1);
     padding-top: 50px; padding-bottom: 50px; cursor: grab;
 }
-/* ... (rest of the slide deck styles) ... */
 .slide-deck-container::-webkit-scrollbar { display: none; }
 .slide-deck-track {
     display: flex; white-space: nowrap; height: 70vh; align-items: center; 
 }
-/* ... (rest of the slide deck styles) ... */
 .slide {
     width: 350px; min-width: 350px; height: 450px; margin: 0 30px; 
     white-space: normal; flex-shrink: 0; scroll-snap-align: center;
     transform: scale(0.85); transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
     padding: 3rem; background: white;
 }
-/* ... (rest of the slide deck styles) ... */
 .slide.is-focused {
     transform: scale(1.05); box-shadow: 0 20px 50px rgba(0,48,87,0.25); 
 }
-/* ... (rest of the slide deck styles) ... */
 .slide-number { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gulliver-accent); font-weight: 700; margin-bottom: 1rem; }
 .slide-title { font-size: 1.75rem; font-family: 'Playfair Display', serif; color: var(--gulliver-navy); margin-bottom: 1rem; line-height: 1.2; }
 .slide-content { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
