@@ -48,47 +48,10 @@ function initMobileMenu() {
 }
 
 // =========================================================================
-// NEW CODE: PROMPTS ACCORDION LOGIC
+// DYNAMIC CONTENT LOADER AND FOCUS CAROUSEL LOGIC (FOR moves.html)
 // =========================================================================
 
-function initPromptsAccordion() {
-    const accordion = document.getElementById('commonAppPrompts');
-    if (!accordion) return;
-
-    accordion.addEventListener('click', function(event) {
-        const header = event.target.closest('.accordion-header');
-        if (!header) return;
-
-        const isExpanded = header.getAttribute('aria-expanded') === 'true';
-        const targetId = header.dataset.target;
-        const body = document.getElementById(targetId);
-
-        // Close all other open panels (optional: remove this loop to allow multiple panels open)
-        accordion.querySelectorAll('.accordion-header[aria-expanded="true"]').forEach(openHeader => {
-            if (openHeader !== header) {
-                openHeader.setAttribute('aria-expanded', 'false');
-                document.getElementById(openHeader.dataset.target).classList.remove('is-open');
-            }
-        });
-        
-        // Toggle the clicked panel
-        if (isExpanded) {
-            header.setAttribute('aria-expanded', 'false');
-            body.classList.remove('is-open');
-        } else {
-            header.setAttribute('aria-expanded', 'true');
-            body.classList.add('is-open');
-        }
-    });
-}
-
-
-// =========================================================================
-// EXISTING CODE: DYNAMIC CONTENT LOADER AND FOCUS CAROUSEL LOGIC
-// (Note: Retained for the 'moves.html' page functionality)
-// =========================================================================
-
-// *** REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL RAW GITHUB URL ***
+// *** IMPORTANT: REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL RAW GITHUB URL ***
 const SLIDE_CONTENT_URL = 'https://raw.githubusercontent.com/YourUsername/YourRepo/main/slides.html'; 
 
 function setupFocusCarousel() {
@@ -154,7 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initProgressBar();
     initMobileMenu();
     
-    // Initialize both interactive components
+    // Initialize the dynamic content loader for moves.html
     loadSlideContent(); 
-    initPromptsAccordion();
+    
+    // NOTE: initPromptsAccordion() call is REMOVED.
 });
