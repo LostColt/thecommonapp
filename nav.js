@@ -47,6 +47,73 @@ function initMobileMenu() {
     });
 }
 
+// =========================================================================
+// NEW CODE: DYNAMIC CONTENT LOADER AND FOCUS CAROUSEL LOGIC
+// =========================================================================
+
+// *** REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL RAW GITHUB URL ***
+const SLIDE_CONTENT_URL = 'https://raw.githubusercontent.com/YourUsername/YourRepo/main/slides.html'; 
+
+function setupFocusCarousel() {
+    const slides = document.querySelectorAll('#sixMovesSlides .slide');
+    const container = document.querySelector('.slide-deck-container');
+
+    if (!slides.length || !container) return; 
+
+    // Intersection Observer configuration for centering the focus
+    const options = {
+        root: container,
+        threshold: 0.5,
+        rootMargin: '0px -40% 0px -40%' 
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const slide = entry.target;
+            if (entry.isIntersecting) {
+                slide.classList.add('is-focused');
+            } else {
+                slide.classList.remove('is-focused');
+            }
+        });
+    }, options);
+
+    slides.forEach(slide => {
+        observer.observe(slide);
+    });
+}
+
+function loadSlideContent() {
+    const contentContainer = document.getElementById('slideDeckWrapper');
+
+    if (!contentContainer) {
+        console.warn("Target container #slideDeckWrapper not found. Cannot load slides.");
+        return;
+    }
+
+    fetch(SLIDE_CONTENT_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(htmlContent => {
+            // 1. Inject the fetched HTML content
+            contentContainer.innerHTML = htmlContent;
+            
+            // 2. Initialize the carousel ONLY after the HTML is in the DOM
+            setupFocusCarousel();
+        })
+        .catch(error => {
+            console.error('Failed to load slide content from GitHub:', error);
+            contentContainer.innerHTML = '<p class="callout" style="color:red;">Error loading content. Please check the GitHub URL and network connection.</p>';
+        });
+}
+
+
+// --- DOCUMENT READY HANDLER ---
+
 document.addEventListener('DOMContentLoaded', function() {
     var path = window.location.pathname;
     var filename = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
@@ -57,4 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderSidebar(current);
     initProgressBar();
     initMobileMenu();
+    
+    // Call the function to load and initialize the slides
+    loadSlideContent(); 
 });
