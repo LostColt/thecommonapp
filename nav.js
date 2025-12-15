@@ -120,5 +120,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the dynamic content loader for moves.html
     loadSlideContent(); 
     
-    // NOTE: initPromptsAccordion() call is REMOVED.
+    // The previous initPromptsAccordion() call is now correctly REMOVED.
 });
