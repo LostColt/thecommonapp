@@ -4,125 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Seven Doorways | Gulliver Prep</title>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
-
-:root {
-    --gulliver-navy: #0F172A;
-    --gulliver-blue: #00338D;
-    --gulliver-accent: #38BDF8;
-    --text-primary: #334155;
-    --text-headings: #0F172A;
-    --bg-sidebar: #0F172A;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text-primary);
-    line-height: 1.7;
-    background: #F8FAFC;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* LAYOUT STRUCTURE */
-.page-wrapper {
-    display: flex;
-    min-height: 100vh;
-    position: relative;
-}
-
-/* SIDEBAR - FORCED FIXED LEFT */
-.sidebar {
-    width: 280px;
-    background: var(--gulliver-navy);
-    color: white;
-    position: fixed; /* STICKS IT TO THE WINDOW */
-    top: 0;
-    left: 0;
-    bottom: 0;
-    height: 100vh;
-    overflow-y: auto;
-    z-index: 100;
-    padding: 3rem 0;
-}
-
-/* MAIN CONTENT - PUSHED RIGHT */
-.main-content {
-    flex: 1;
-    margin-left: 280px; /* CRITICAL: MOVES CONTENT OUT FROM UNDER SIDEBAR */
-    max-width: 900px;
-    padding: 4rem 3rem;
-    background: white;
-    min-height: 100vh;
-}
-
-/* TYPOGRAPHY */
-h1, h2 { font-family: 'Playfair Display', serif; color: var(--text-headings); }
-h1.page-title { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.5rem; }
-.page-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.35rem; color: #64748B; margin-bottom: 3rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 2rem; }
-h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1.5rem; border-top: 1px solid #f1f5f9; padding-top: 2rem; }
-h3 { font-family: 'Inter', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; color: var(--gulliver-blue); margin-top: 2rem; margin-bottom: 1rem; }
-p { margin-bottom: 1.5rem; font-size: 1.05rem; }
-
-/* NAVIGATION ITEMS */
-.sidebar-brand { padding: 0 2rem; margin-bottom: 3rem; }
-.sidebar-brand h1 { color: white; font-size: 1.8rem; line-height: 1.2; }
-.brand-line { width: 40px; height: 3px; background: var(--gulliver-accent); margin-top: 1rem; }
-
-.nav-list { list-style: none; position: relative; }
-.nav-list li a { 
-    display: block; 
-    padding: 0.8rem 2rem; 
-    color: #94A3B8; 
-    text-decoration: none; 
-    font-size: 0.95rem; 
-    font-weight: 500; 
-    transition: color 0.3s ease; 
-    position: relative;
-    z-index: 2;
-}
-.nav-list li a:hover, .nav-list li a.active { color: white; }
-
-/* THE GLIDER MARKER */
-.nav-marker { 
-    position: absolute; 
-    left: 0; 
-    width: 3px; 
-    background-color: var(--gulliver-accent); 
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    z-index: 1; 
-    box-shadow: 2px 0 10px rgba(56, 189, 248, 0.3);
-}
-
-/* COMPONENTS */
-.callout { display: flex; gap: 1rem; background: #F8FAFC; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--gulliver-accent); margin: 2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-.callout .icon { font-size: 1.5rem; }
-blockquote { border-left: 4px solid var(--gulliver-blue); padding-left: 1.5rem; font-style: italic; color: #475569; margin: 2rem 0; font-size: 1.2rem; }
-figure { margin: 2rem 0; text-align: center; }
-img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-figcaption { margin-top: 0.8rem; font-size: 0.9rem; color: #64748B; }
-
-/* EMBEDS */
-.slide-embed-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; margin: 2.5rem 0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); background: #f1f5f9; }
-.slide-embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-/* MOBILE RESPONSIVE OVERRIDES */
-@media (max-width: 1024px) {
-    .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; width: 280px; box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
-    .main-content { margin-left: 0; padding: 5rem 1.5rem; }
-    
-    .page-wrapper.sidebar-open .sidebar { transform: translateX(0); }
-    
-    .mobile-header { display: block; position: fixed; top: 0; left: 0; width: 100%; padding: 1rem; z-index: 50; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
-    .mobile-menu-btn { background: transparent; color: var(--gulliver-navy); border: none; font-size: 1.8rem; cursor: pointer; }
-    
-    .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 90; }
-    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
-}
-@media (min-width: 1025px) { .mobile-header, .mobile-overlay { display: none; } }
-</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="mobile-overlay"></div>
@@ -140,7 +22,7 @@ figcaption { margin-top: 0.8rem; font-size: 0.9rem; color: #64748B; }
 <div class="callout"><span class="icon">💡</span><div class="callout-content"><strong>The prompt doesn't matter. Your story matters.</strong></div></div>
 <p>Pick the prompt that gives you the clearest path to your most honest material. That's it. If your story fits multiple prompts, just pick one and move on.</p>
 <p>Below are the seven prompts, decoded. Each one is a different lens for looking at the same question: <em>What matters to you, and why?</em></p>
-<figure><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/c7f0c445-cad0-4acc-8cb1-91501527dbc3/c9cc442b-f4f4-4a84-9a37-56eb96c08540/Gulliver_Prep_Common_App_Prompts_%28Single_Slide%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466RF5JHQMH%2F20251216%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251216T202353Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIEG9XCZ%2B73RiJJJgKoEVHR9LZcXwET8wsghqC37QANEnAiEAnOKHbGk7Mfw%2FCYYr6Lmqzg8VYqmK32fV4Bx%2Bb3d6lGwq%2FwMIbRAAGgw2Mzc0MjMxODM4MDUiDKR6saGVUQLbHb1aEircA5w4%2FgyNOEr2J9Kx2bAvRFq2%2BDAAt1XvSQGfWNtglb5gJKIv48KHxk51SX%2FoPZmR4ZKa3csXCHNFpMSke058sl8mQUAFmcbmBUQBxW7tN6ksKB78gDkzR3N0YyqjLHPsK%2FNDc1uxsG2amF16zYPpTR1xeDzH0J86DnyyRIc1kjjovl1hg9JveYrXpdmMqraSwJo4N%2Bc7z%2FgndPxV1E%2F%2FY91%2BJvFz25fUgqGdh6hPQMRy04Jqe5qxfmSQi7a6qib13ZyTHmPKvnjWO5ksEVCC6XYq%2F82hFmYPObFDmB5E2m2C5IoP5hJ5goxwwoBz2t1SmHyuF5ZBhN%2F1gWzc5EgdONOY5HXhz3mM8ISZaPsPGtC8oKoqPVLEJe%2BsxBnppj176U5y60XZYpOwcIc9LjVK589cwRCQRMFmryeyBejiDO8HyMNKVc24IYHSWJOIEnmdzuUia34aeqgPCqvRJghhsAZGmsLcwOL%2B%2B43YzyY1OFHdk4lIebXhVlm5Y4MikgCE5abWsZSzY%2BWadjy3sHsAlLcD07%2BdMtq2Plx%2BVaCgGyLQLvxIwMuHuxac0lr1DdUhdVBbxwOMc5mhdJJfNDXsTBwXDfnloWzNnFEr7fjpQbCtKuDpusOzowvH%2B3vTMPvthsoGOqUBu2sbwcjGb3lNV9P%2B6%2Bi7kivd%2BYkcXwznTPV2HRFfX545d4gDjrpGWiZxMM4kFOMpDnGjyx4GtpsVa1pWr99GFl0W%2FNpVhHUwDkeIa%2B0CzWZa8EepMnrEcelRYpTBz0Z02EbZQRclF2nhg%2Bqy5odsPQvm5EeGvjhAVJ%2BaEJW4MiLnTWDPgliWxLLJQjJmBluIkZVsvQOME18ZPMLB%2Bez0g9jTY3t9&X-Amz-Signature=3c7b73639c96ca9aa50ed9b6bf6c464ab0c31dbc6605c8c65e722a341d668d12&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/c7f0c445-cad0-4acc-8cb1-91501527dbc3/c9cc442b-f4f4-4a84-9a37-56eb96c08540/Gulliver_Prep_Common_App_Prompts_%28Single_Slide%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466YN5ISCKG%2F20251216%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251216T203400Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCICXbwkdUdYdo3zylUTyscfu7k%2BagT2Qe0Tbo1j2pxo1pAiB0vmzeXHfvVacig1IraQWEQVp26GGgvWntXI4dyjKInSr%2FAwhtEAAaDDYzNzQyMzE4MzgwNSIMMSNIc%2F%2FAC%2FmSuMWBKtwDG3c%2BYtOdJirkHdRvX36SPhtEZjJmxeeH0327LH1HtUiU3rqfV1Qw5OpJqoljMTf57rWuXenB1eBlDnno8T%2B0bLIFZpG4%2BVQE%2FlYiQBVesSqOm6vj2BLT9qtvOuxf3eA3bjYub2PqGNRcChx49Ce5VqBtU6EVKAjyQXH78YctL%2FWQbZsTtViM0wWz3UR0NDHEim%2BuxxX4kZhMYk2KAmY%2Buh3TJx3t%2F7G11e4WIkSfIdUr7ohKBrQDqSYPkkRJar72LKwQms3bQmvhG0nPFGTf7Z6o%2BZMKy8zkJ1tfaNlUgxavnJ%2BtNSCGzV5ZJCpN70csOb1%2B1YAuZeuuffYYnLblGEhGJIfXblTwF155IedXTOCWnsvxGhmhAyFAa%2FAPc0twD%2BjVe2nIpKlMyeUU7JLEqD8SROcMX3nwA7K9aLGrcMckS%2Bz9YWnex5H6yxOQVKLhMIgKn5T3dlVgggTcQFZqN6HxHUCnVgFY3b9Gce76A9gNSm7bNtv2SxxDtGmxyCoQkkiIw1qZpMt2xinER7Rj11MK7iEaxZUXvWtPdMtTiUorBKK%2FcPjdCJx68sMaRXos3QZM%2F0T5vDJdblTfGRLMK5ZBF7BixoTd09l%2B0q417PXk8teangExaayF7N0wyu2GygY6pgEvqL5nGlZyDi543rlQtOjrhrsGjXeTH%2B6UIbvtBq%2B%2Foy8hbI26f5%2BZjrHh9Ur7iBNDr%2FcKU3tVda5%2FrqTdxmbaMnEy9KWtfqwzunaAN3PB0%2FW4VWKO9mLP5AqEn08YoRY2spyFnf4NEH6%2FZdbTGOygyc%2FeXTdHpsBrKyCNs6gJ90xYTDzkF%2BfsQtl1VCwcWb1Nz0scwrdBbKMS8k82KJdWBOYqP5Ps&X-Amz-Signature=4fa9c9cbd0f419ffb259755452e77d4510abc8f756459691820db5d1213efc70&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt=""><figcaption></figcaption></figure>
 <h2>What They're Really Asking</h2>
 <p>All seven prompts are just different doorways into the same room. The room is <strong>you</strong>.</p>
 <p>Admissions officers aren't judging you on which prompt you pick. They are judging you on <strong>clarity</strong> and <strong>depth</strong>.</p>
