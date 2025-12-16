@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>undefined | Gulliver Prep</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+  <div class="mobile-overlay"></div>
+  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
+  
+  <div class="page-wrapper">
+    <nav class="sidebar"></nav>
+    <main class="main-content">
+      <h1 class="page-title">undefined</h1>
+      <p class="page-subtitle"></p>
+      <div class="prose"><p>What you need to know about the Prompts</p>
+<p>The Common App gives you seven prompts. That's seven different ways to begin. But here's what most students miss: <strong>the prompts aren't really different.</strong></p>
+<p>They're all asking the same thing. They're all trying to get you to reveal something meaningful about who you are. The only difference is the angle — the doorway you walk through to get there.</p>
+<p>Some students obsess over picking the "right" prompt. They analyze each one, trying to figure out which will make them look best. This is a mistake.</p>
+<div class="callout"><span class="icon">💡</span><div class="callout-content"><strong>The prompt doesn't matter. Your story matters.</strong></div></div>
+<p>Pick the prompt that gives you the clearest path to your most honest material. That's it. If your story fits multiple prompts, just pick one and move on.</p>
+<p>Below are the seven prompts, decoded. Each one is a different lens for looking at the same question: <em>What matters to you, and why?</em></p>
+<figure><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/c7f0c445-cad0-4acc-8cb1-91501527dbc3/c9cc442b-f4f4-4a84-9a37-56eb96c08540/Gulliver_Prep_Common_App_Prompts_%28Single_Slide%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466VCJH5KYE%2F20251216%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20251216T184338Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCmsnj6S8oq3N92sWBYs%2FwRVGNd6M1kQBnkAyvRQiXSaAIhAM%2BDeRPe8mvPxJakIbSZkfN4clRBwDxiUHyLNFiDv1oQKv8DCGwQABoMNjM3NDIzMTgzODA1Igw7PlFMhWF1n4ShcxEq3AMnLUjCyfbJOP1UYlpY87EKHPtpmisjAt%2FIHK8DV6%2FvA2Rh1IgoColsPq%2BFJ3MBxTdzc0Hb3HAdEJzhTVzmfEBZffJdV0I0KZKJZJnFAwaP6WEje6Gsx6IilBh1cj41eUy4uS091%2FHrnVVn5a4NTKF2byg8mhecBP0jRD842crq%2BVKRvaW1qhuKfQWFIf6ZbDdkD9y9JfMOskyelqRWsLaJiB2V35Kg332Pmya%2FldkOPWlnNuohQO9Ajds0sZayfX%2F0vyf1rFoXj67NxvOzr%2FG90AvasQfxfRLtjW6lb%2FpyRUSjwyy%2Bz3c%2FOW4XeyFQ9VNkL1aLe1CWu4E7V6yAU%2FoBbPeln819lAEImOissIZXk5%2BTrzTxPicCz1f0fXoqo%2FMCpAUr5OIDlsELEJAajhwVMgoQeoWN1sT0KrcDo55Gta2WzdPLzOWH53BfX3SizJmWe3sn9jJpA5FSaa7zXYamGUzu0RNBHKFzjnju%2FyxjljKf1S0JhLsRgxXTn6ORsZ18WAlV6b5%2FQbgSRApJ7JCXTngq9ihQk%2Bj5L63gkqtG7A50%2Bxb7YUKfKf9QeKUjSGo7YGrbwkEhPRJSbbmW5SEI7YdWkr9%2FUGcXg%2FbKcPIaoLIEIuW%2BxMrnfICUHjDpz4bKBjqkAVkn%2FN0zmsSGNBpcnQQWnYU60NfRyTQdE0UhsYlNrPRelDxzCsdYCiVuZ2mGQ0K%2Fr%2BykspKbxie2ebpD%2BhpqZT9btEHXEshsXbwjsl4Xm2zdh7JtNscJq%2BhMTDxokZSSMBlgYztEh%2BglCfFuiljWeNsJ7QM4THvOjGWgjZEKAx1bMmrRgm1uHMTn6p7ZvSTTvqTjSUkN1CH93qOkTCi%2BfeyWmh6E&X-Amz-Signature=e64525e9ea69213f12bbe9eed66ce6990e33be09a0055e0fe7109cd8785562dd&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" alt=""><figcaption></figcaption></figure>
+<h2>What They're Really Asking</h2>
+<p>All seven prompts are just different doorways into the same room. The room is <strong>you</strong>.</p>
+<p>Admissions officers aren't judging you on which prompt you pick. They are judging you on <strong>clarity</strong> and <strong>depth</strong>.</p>
+<ul>
+<li><strong>Don't worry</strong> about picking the "right" prompt.</li>
+<li><strong>Do worry</strong> about picking the prompt that lets you tell your most honest story.</li>
+</ul>
+<p>No matter which one you choose, the real question is always: <strong>"What matters to you, and why?"</strong></p>
+</div>
+    </main>
+  </div>
+
+  <script src="nav.js"></script>
+</body>
+</html>

@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Field Guide to Pitfalls | College Essay Guide | Gulliver Prep</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=Fira+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>undefined | Gulliver Prep</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
-  <div class="mobile-overlay"></div>
-  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
-  <div class="page-wrapper">
-    <nav class="sidebar"></nav>
-    <main class="main-content">
-      <h1 class="page-title">The Field Guide to Pitfalls</h1>
-      <p class="page-subtitle"></p>
-      <div class="prose"><h2>Opening Mistakes</h2>
+  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+  <div class="mobile-overlay"></div>
+  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
+  
+  <div class="page-wrapper">
+    <nav class="sidebar"></nav>
+    <main class="main-content">
+      <h1 class="page-title">undefined</h1>
+      <p class="page-subtitle"></p>
+      <div class="prose"><h2>Opening Mistakes</h2>
 <ul>
 <li><strong>Throat-Clearing:</strong> "I have always been the kind of person who..." (Wasting words on setup).</li>
 <li><strong>Generic Opening:</strong> "I have always been interested in science." (Could apply to anyone).</li>
 <li><strong>The Fix:</strong> Start late, grab early. Jump into a specific moment within the first sentence.</li>
 </ul>
-<hr>
 <h2>Structure Mistakes</h2>
 <ul>
 <li><strong>Resume Format:</strong> Listing accomplishments ("I organized five fundraisers...") instead of telling a story.</li>
 <li><strong>Covering Too Much Ground:</strong> Trying to fit your whole life into 650 words.</li>
 <li><strong>The Fix:</strong> One moment. One insight. Go deep.</li>
 </ul>
-<hr>
 <h2>Content Mistakes</h2>
 <ul>
 <li><strong>Tell, Don't Show:</strong> "I am a hard worker." (Show us the work instead).</li>
@@ -37,28 +35,24 @@
 <li><strong>Trauma Dump:</strong> Focusing 100% on the hardship, 0% on the growth.</li>
 <li><strong>Humble Bragging:</strong> "Everyone comes to me for advice."</li>
 </ul>
-<hr>
 <h2>Voice Mistakes</h2>
 <ul>
 <li><strong>Resume Language:</strong> Using words like "facilitated," "leveraged," "endeavored."</li>
 <li><strong>Thesaurus Syndrome:</strong> Using "plethora" or "myriad" to sound smart.</li>
 <li><strong>The Fix:</strong> Use the Coffee Shop Test. Write like you talk to a friend.</li>
 </ul>
-<hr>
 <h2>Reflection Mistakes</h2>
 <ul>
 <li><strong>Stating the Lesson:</strong> "I learned the importance of hard work." (Show <em>how</em> you figured it out).</li>
 <li><strong>Missing "So What?":</strong> Describing events without explaining why they matter.</li>
 <li><strong>Fake Insight:</strong> "I learned to never give up." (Generic platitude).</li>
 </ul>
-<hr>
 <h2>Ending Mistakes</h2>
 <ul>
 <li><strong>Restating Everything:</strong> Summarizing what you just said.</li>
 <li><strong>"I'm Ready for College":</strong> "This is why I'm prepared for the challenges..." (Don't say this).</li>
 <li><strong>Trailing Off:</strong> Ending without closure.</li>
 </ul>
-<hr>
 <h2>Revision Mistakes</h2>
 <ul>
 <li><strong>Not Reading Aloud:</strong> Missing rhythm and flow issues.</li>
@@ -66,8 +60,9 @@
 <li><strong>Not Using Feedback:</strong> Ignoring advice to improve.</li>
 </ul>
 </div>
-    </main>
-  </div>
-  <script src="nav.js"></script>
+    </main>
+  </div>
+
+  <script src="nav.js"></script>
 </body>
 </html>

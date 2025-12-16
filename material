@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Small Moments, Big Insights. | College Essay Guide | Gulliver Prep</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=Fira+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>undefined | Gulliver Prep</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
-  <div class="mobile-overlay"></div>
-  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
-  <div class="page-wrapper">
-    <nav class="sidebar"></nav>
-    <main class="main-content">
-      <h1 class="page-title">Small Moments, Big Insights.</h1>
-      <p class="page-subtitle"></p>
-      <div class="prose"><h2>The Power of Small Moments</h2>
+  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+  <div class="mobile-overlay"></div>
+  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
+  
+  <div class="page-wrapper">
+    <nav class="sidebar"></nav>
+    <main class="main-content">
+      <h1 class="page-title">undefined</h1>
+      <p class="page-subtitle"></p>
+      <div class="prose"><h2>The Power of Small Moments</h2>
 <p>The best essays are rarely about the championship game or the mission trip. They are about <strong>small moments</strong>: a conversation that shifted your thinking, a quiet decision nobody else saw, or noticing a pattern in your own behavior.</p>
 <p><strong>The smaller the moment, the bigger the insight.</strong></p>
-<hr>
 <h2>The Reality Check</h2>
 <p>Most students panic because they think they lack "material." They are usually looking through the wrong lens.</p>
 <p><strong>The Myth:</strong> "I need a tragedy or a massive accomplishment."</p>
@@ -28,7 +27,6 @@
 <p><strong>The Reality:</strong> You need to sound <strong>honest</strong>. Admissions officers can smell a "performance" from a mile away.</p>
 <p><strong>The Myth:</strong> "I need a story with a perfect happy ending."</p>
 <p><strong>The Reality:</strong> You need a story that is <strong>yours</strong>. Unresolved endings are often more interesting than perfect ones.</p>
-<hr>
 <h2>The "Zoom-In" Exercise</h2>
 <p>Don't brainstorm "topics." Brainstorm <strong>scenes</strong>. Close your eyes and run your memory like a movie. Where does the camera zoom in?</p>
 <h3>Work</h3>
@@ -47,8 +45,9 @@
 <li>✅ <strong>Zoom In:</strong> "The 30 seconds of silence before I decided to enforce a rule against my friend."</li>
 </ul>
 </div>
-    </main>
-  </div>
-  <script src="nav.js"></script>
+    </main>
+  </div>
+
+  <script src="nav.js"></script>
 </body>
 </html>

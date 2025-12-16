@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The And Then Trap. | College Essay Guide | Gulliver Prep</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=Fira+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>undefined | Gulliver Prep</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
-  <div class="mobile-overlay"></div>
-  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
-  <div class="page-wrapper">
-    <nav class="sidebar"></nav>
-    <main class="main-content">
-      <h1 class="page-title">The And Then Trap.</h1>
-      <p class="page-subtitle"></p>
-      <div class="prose"><h2>The "And Then" Trap</h2>
+  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+  <div class="mobile-overlay"></div>
+  <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
+  
+  <div class="page-wrapper">
+    <nav class="sidebar"></nav>
+    <main class="main-content">
+      <h1 class="page-title">undefined</h1>
+      <p class="page-subtitle"></p>
+      <div class="prose"><h2>The "And Then" Trap</h2>
 <p>Most first drafts sound like this:</p>
 <blockquote>"I joined the robotics team and then we started building the robot and then we competed and then we won the regional championship and then I learned the value of teamwork."</blockquote>
 <p>This is <strong>chronology</strong>, not reflection. You're telling me what happened in order, but you're not pausing to think about what it meant. The story moves forward, but it never goes deeper.</p>
-<hr>
 <h2>The Fix</h2>
 <p>You don't owe the reader the full story. You owe them your <strong>thinking</strong>.</p>
 <p>You need to <strong>interrupt the story</strong> to examine what's beneath the surface.</p>
@@ -30,8 +29,9 @@
 <li><strong>Reflection</strong> = "Stop the tape. Why did that specific moment surprise me? What was I assuming <em>before</em> it happened? What does it reveal about how I see the world?"</li>
 </ul>
 </div>
-    </main>
-  </div>
-  <script src="nav.js"></script>
+    </main>
+  </div>
+
+  <script src="nav.js"></script>
 </body>
 </html>
