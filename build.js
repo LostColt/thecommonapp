@@ -14,7 +14,7 @@ async function fetchPages() {
   return response.results;
 }
 
-// 2. Recursive Block Fetching (The "Empty Callout" Fix)
+// 2. Recursive Block Fetching
 async function fetchPageBlocks(blockId) {
   let blocks = [];
   let cursor;
@@ -81,11 +81,9 @@ async function blocksToHtml(blocks) {
       if (listType !== 'ol') { html += '<ol>\n'; listType = 'ol'; }
       html += `<li>${richTextToHtml(block.numbered_list_item.rich_text)}</li>\n`;
     }
-
     else if (type === 'quote') {
       html += `<blockquote>${richTextToHtml(block.quote.rich_text)}</blockquote>\n`;
     } 
-
     else if (type === 'callout') {
       const emoji = block.callout.icon ? block.callout.icon.emoji : '💡';
       let content = richTextToHtml(block.callout.rich_text);
@@ -94,18 +92,24 @@ async function blocksToHtml(blocks) {
       }
       html += `<div class="callout"><span class="icon">${emoji}</span><div class="callout-content">${content}</div></div>\n`;
     }
-
     else if (type === 'image') {
       const url = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
       const caption = block.image.caption ? richTextToHtml(block.image.caption) : '';
       html += `<figure><img src="${url}" alt="${caption}"><figcaption>${caption}</figcaption></figure>\n`;
     }
 
-    // Embed Block (Google Slides Support)
+    // --- FIX START: EMBED REPAIR LOGIC ---
     else if (type === 'embed') {
-        const url = block.embed.url;
+        let url = block.embed.url;
+        
+        // Auto-fix Google Slides links (Edit/View -> Embed)
+        if (url.includes('docs.google.com/presentation')) {
+            url = url.replace(/\/edit.*$/, '/embed').replace(/\/view.*$/, '/embed');
+        }
+
         html += `<div class="slide-embed-container"><iframe src="${url}" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></div>\n`;
     }
+    // --- FIX END ---
   }
 
   if (listType) html += listType === 'ul' ? '</ul>\n' : '</ol>\n';
@@ -144,14 +148,14 @@ async function build() {
 
   if (!fs.existsSync('dist')) fs.mkdirSync('dist');
   
-  // COPY FILES
-  fs.copyFileSync('styles.css', 'dist/styles.css');
+  if (fs.existsSync('styles.css')) {
+    fs.copyFileSync('styles.css', 'dist/styles.css');
+  }
   fs.copyFileSync('nav.js', 'dist/nav.js');
 
   for (const page of pages) {
     const props = page.properties;
     
-    // SMART SLUG HANDLING
     let slug = props.Slug?.rich_text[0]?.plain_text;
     if (!slug) continue;
     slug = slug.trim();
