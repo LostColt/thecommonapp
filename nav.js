@@ -10,115 +10,104 @@ const NAV_ITEMS = [
 ];
 
 function renderSidebar(currentPage) {
-    var sidebar = document.querySelector('.sidebar');
+    const sidebar = document.querySelector('.sidebar');
     if (!sidebar) return;
-    var navHtml = '';
-    for (var i = 0; i < NAV_ITEMS.length; i++) {
-        var item = NAV_ITEMS[i];
-        var isActive = item.id === currentPage;
-        navHtml += '<li class="' + (isActive ? 'active' : '') + '">';
-        navHtml += '<a href="' + item.href + '" class="' + (isActive ? 'active' : '') + '">' + item.label + '</a></li>';
+
+    // 1. Build the Header
+    let html = `
+        <div class="sidebar-brand">
+            <h1>Gulliver<br>Prep</h1>
+            <div class="brand-line"></div>
+        </div>
+        <ul class="nav-list">
+    `;
+
+    // 2. Build the Links
+    NAV_ITEMS.forEach(item => {
+        const isActive = item.id === currentPage;
+        // We do NOT add the active style inline anymore, we rely on the class
+        html += `<li><a href="${item.href}" class="${isActive ? 'active' : ''}">${item.label}</a></li>`;
+    });
+
+    html += `</ul>`;
+    
+    // 3. Inject HTML
+    sidebar.innerHTML = html;
+
+    // 4. Initialize the "Glider" (The moving marker)
+    initGlider();
+}
+
+function initGlider() {
+    const navList = document.querySelector('.nav-list');
+    const activeLink = navList.querySelector('a.active');
+    
+    if (!navList || !activeLink) return;
+
+    // Create the marker element if it doesn't exist
+    let marker = document.querySelector('.nav-marker');
+    if (!marker) {
+        marker = document.createElement('div');
+        marker.classList.add('nav-marker');
+        navList.appendChild(marker);
     }
-    sidebar.innerHTML = '<div class="sidebar-brand"><h1>Gulliver<br>Prep</h1><div class="sidebar-brand-divider"></div><p class="sidebar-brand-subtitle">College Essay</p><p class="sidebar-brand-subtitle">Guide 2026-27</p></div><ul class="sidebar-nav">' + navHtml + '</ul><div class="sidebar-footer"><p class="sidebar-footer-name">David Tran</p><p class="sidebar-footer-title">College Essay Writing Coach</p><a href="mailto:dtran@gulliverprep.org" class="sidebar-footer-email">dtran@gulliverprep.org</a></div>';
-}
 
-function initProgressBar() {
-    var fill = document.querySelector('.progress-bar-fill');
-    if (!fill) return;
-    window.addEventListener('scroll', function() {
-        var scrollTop = window.scrollY;
-        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        fill.style.width = docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
+    // Function to move marker to the target element
+    function moveMarker(target) {
+        // We calculate position relative to the UL parent
+        marker.style.top = target.offsetTop + 'px';
+        marker.style.height = target.offsetHeight + 'px';
+    }
+
+    // Move to the active link immediately
+    moveMarker(activeLink);
+
+    // Optional: Make it follow hover (Interactive Gliding)
+    const links = navList.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => moveMarker(link));
     });
+
+    // Return to active link when mouse leaves the sidebar area
+    navList.addEventListener('mouseleave', () => moveMarker(activeLink));
+    
+    // Recalculate on window resize
+    window.addEventListener('resize', () => moveMarker(activeLink));
 }
-
-function initMobileMenu() {
-    var btn = document.querySelector('.mobile-menu-btn');
-    var sidebar = document.querySelector('.sidebar');
-    var overlay = document.querySelector('.mobile-overlay');
-    if (!btn || !sidebar) return;
-    btn.addEventListener('click', function() {
-        sidebar.classList.toggle('mobile-open');
-        if (overlay) overlay.classList.toggle('active');
-    });
-    if (overlay) overlay.addEventListener('click', function() {
-        sidebar.classList.remove('mobile-open');
-        overlay.classList.remove('active');
-    });
-}
-
-// =========================================================================
-// DYNAMIC CONTENT LOADER AND FOCUS CAROUSEL LOGIC (FOR moves.html)
-// =========================================================================
-
-// *** IMPORTANT: REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL RAW GITHUB URL ***
-const SLIDE_CONTENT_URL = 'https://raw.githubusercontent.com/YourUsername/YourRepo/main/slides.html'; 
-
-function setupFocusCarousel() {
-    const slides = document.querySelectorAll('#sixMovesSlides .slide');
-    const container = document.querySelector('.slide-deck-container');
-
-    if (!slides.length || !container) return; 
-
-    const options = {
-        root: container,
-        threshold: 0.5,
-        rootMargin: '0px -40% 0px -40%' 
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const slide = entry.target;
-            if (entry.isIntersecting) {
-                slide.classList.add('is-focused');
-            } else {
-                slide.classList.remove('is-focused');
-            }
-        });
-    }, options);
-
-    slides.forEach(slide => {
-        observer.observe(slide);
-    });
-}
-
-function loadSlideContent() {
-    const contentContainer = document.getElementById('slideDeckWrapper');
-    if (!contentContainer) return;
-
-    fetch(SLIDE_CONTENT_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(htmlContent => {
-            contentContainer.innerHTML = htmlContent;
-            setupFocusCarousel();
-        })
-        .catch(error => {
-            console.error('Failed to load slide content from GitHub:', error);
-            contentContainer.innerHTML = '<p class="callout" style="color:red;">Error loading content. Please check the GitHub URL and network connection.</p>';
-        });
-}
-
 
 // --- DOCUMENT READY HANDLER ---
-
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Determine Current Page
     var path = window.location.pathname;
     var filename = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
     var current = 'index';
+    
     for (var i = 0; i < NAV_ITEMS.length; i++) {
-        if (NAV_ITEMS[i].href === filename) { current = NAV_ITEMS[i].id; break; }
+        if (NAV_ITEMS[i].href === filename) { 
+            current = NAV_ITEMS[i].id; 
+            break; 
+        }
     }
+
+    // 2. Render Sidebar
     renderSidebar(current);
-    initProgressBar();
-    initMobileMenu();
+
+    // 3. Mobile Menu Logic
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const pageWrapper = document.querySelector('.page-wrapper');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    if (mobileBtn) {
+        mobileBtn.addEventListener('click', () => {
+            pageWrapper.classList.toggle('sidebar-open');
+            overlay.classList.toggle('active');
+        });
+    }
     
-    // Initialize the dynamic content loader for moves.html
-    loadSlideContent(); 
-    
-    // The previous initPromptsAccordion() call is now correctly REMOVED.
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            pageWrapper.classList.remove('sidebar-open');
+            overlay.classList.remove('active');
+        });
+    }
 });
