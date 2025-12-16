@@ -5,6 +5,7 @@ const path = require('path');
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID;
 
+// 1. Fetch all pages from the Database
 async function fetchPages() {
   const response = await notion.databases.query({
     database_id: databaseId,
@@ -13,11 +14,32 @@ async function fetchPages() {
   return response.results;
 }
 
-async function fetchPageContent(pageId) {
-  const blocks = await notion.blocks.children.list({ block_id: pageId });
-  return blocks.results;
+// 2. Fetch blocks (and their children recursively!)
+async function fetchPageBlocks(blockId) {
+  let blocks = [];
+  let cursor;
+  
+  while (true) {
+    const { results, next_cursor } = await notion.blocks.children.list({
+      block_id: blockId,
+      start_cursor: cursor,
+    });
+    
+    // For every block, check if it has children (nested content)
+    for (const block of results) {
+      if (block.has_children) {
+        block.children = await fetchPageBlocks(block.id);
+      }
+    }
+    
+    blocks = [...blocks, ...results];
+    if (!next_cursor) break;
+    cursor = next_cursor;
+  }
+  return blocks;
 }
 
+// 3. Convert Rich Text to HTML
 function richTextToHtml(richText) {
   if (!richText) return '';
   return richText.map(t => {
@@ -32,6 +54,7 @@ function richTextToHtml(richText) {
   }).join('');
 }
 
+// 4. Convert Blocks to HTML (The Main Logic)
 async function blocksToHtml(blocks) {
   let html = '';
   let listType = null;
@@ -39,24 +62,22 @@ async function blocksToHtml(blocks) {
   for (const block of blocks) {
     const type = block.type;
 
+    // Handle List Closing
     if (type !== 'bulleted_list_item' && type !== 'numbered_list_item' && listType) {
       html += listType === 'ul' ? '</ul>\n' : '</ol>\n';
       listType = null;
     }
 
+    // --- PARAGRAPHS & HEADERS ---
     if (type === 'paragraph') {
       const text = richTextToHtml(block.paragraph.rich_text);
       if (text) html += `<p>${text}</p>\n`;
     } 
-    else if (type === 'heading_1') {
-      html += `<h1>${richTextToHtml(block.heading_1.rich_text)}</h1>\n`;
-    } 
-    else if (type === 'heading_2') {
-      html += `<h2>${richTextToHtml(block.heading_2.rich_text)}</h2>\n`;
-    } 
-    else if (type === 'heading_3') {
-      html += `<h3>${richTextToHtml(block.heading_3.rich_text)}</h3>\n`;
-    }
+    else if (type === 'heading_1') html += `<h1>${richTextToHtml(block.heading_1.rich_text)}</h1>\n`;
+    else if (type === 'heading_2') html += `<h2>${richTextToHtml(block.heading_2.rich_text)}</h2>\n`;
+    else if (type === 'heading_3') html += `<h3>${richTextToHtml(block.heading_3.rich_text)}</h3>\n`;
+    
+    // --- LISTS ---
     else if (type === 'bulleted_list_item') {
       if (listType !== 'ul') { html += '<ul>\n'; listType = 'ul'; }
       html += `<li>${richTextToHtml(block.bulleted_list_item.rich_text)}</li>\n`;
@@ -65,18 +86,33 @@ async function blocksToHtml(blocks) {
       if (listType !== 'ol') { html += '<ol>\n'; listType = 'ol'; }
       html += `<li>${richTextToHtml(block.numbered_list_item.rich_text)}</li>\n`;
     }
+
+    // --- QUOTES ---
     else if (type === 'quote') {
       html += `<blockquote>${richTextToHtml(block.quote.rich_text)}</blockquote>\n`;
     } 
+
+    // --- CALLOUTS (With Recursion Fix) ---
     else if (type === 'callout') {
       const emoji = block.callout.icon ? block.callout.icon.emoji : '💡';
-      html += `<div class="callout"><span class="icon">${emoji}</span><div class="callout-content">${richTextToHtml(block.callout.rich_text)}</div></div>\n`;
+      let content = richTextToHtml(block.callout.rich_text);
+      
+      // If there are nested blocks inside the callout, fetch them too
+      if (block.children) {
+        content += await blocksToHtml(block.children);
+      }
+      
+      html += `<div class="callout"><span class="icon">${emoji}</span><div class="callout-content">${content}</div></div>\n`;
     }
+
+    // --- IMAGES ---
     else if (type === 'image') {
       const url = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
       const caption = block.image.caption ? richTextToHtml(block.image.caption) : '';
       html += `<figure><img src="${url}" alt="${caption}"><figcaption>${caption}</figcaption></figure>\n`;
     }
+
+    // --- EMBEDS (Google Slides) ---
     else if (type === 'embed') {
         const url = block.embed.url;
         html += `<div class="slide-embed-container"><iframe src="${url}" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></div>\n`;
@@ -87,6 +123,7 @@ async function blocksToHtml(blocks) {
   return html;
 }
 
+// 5. Wrap HTML in the Site Template
 function wrapPage(title, subtitle, content) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -97,7 +134,6 @@ function wrapPage(title, subtitle, content) {
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
   <div class="mobile-overlay"></div>
   <header class="mobile-header"><button class="mobile-menu-btn">☰</button></header>
   
@@ -115,6 +151,7 @@ function wrapPage(title, subtitle, content) {
 </html>`;
 }
 
+// 6. The Master Build Process
 async function build() {
   console.log('Fetching pages from Notion...');
   const pages = await fetchPages();
@@ -126,32 +163,23 @@ async function build() {
   for (const page of pages) {
     const props = page.properties;
     
-    // --- FIX START: Better Slug Handling ---
+    // SMART SLUG LOGIC
     let slug = props.Slug?.rich_text[0]?.plain_text;
-    
-    // 1. If no slug in Notion, skip this page
     if (!slug) continue;
-    
     slug = slug.trim();
+    if (slug.toLowerCase() === 'home' || slug.toLowerCase() === 'index') slug = 'index.html';
+    if (!slug.endsWith('.html')) slug += '.html';
 
-    // 2. Force "Home" or "index" to become "index.html"
-    if (slug.toLowerCase() === 'home' || slug.toLowerCase() === 'index') {
-        slug = 'index.html';
-    }
-
-    // 3. Ensure every file has the .html extension
-    if (!slug.endsWith('.html')) {
-        slug += '.html';
-    }
-    // --- FIX END ---
-
-    const title = props.Page?.title[0]?.plain_text;
+    const title = props.Page?.title[0]?.plain_text || 'Untitled';
     const subtitle = props.Subtitle?.rich_text[0]?.plain_text || '';
     
     console.log(`Building: ${slug}`);
-    const blocks = await fetchPageContent(page.id);
+    
+    // Fetch content recursively
+    const blocks = await fetchPageBlocks(page.id);
     const contentHtml = await blocksToHtml(blocks);
     const fullHtml = wrapPage(title, subtitle, contentHtml);
+    
     fs.writeFileSync(`dist/${slug}`, fullHtml);
   }
   console.log('Build complete!');
