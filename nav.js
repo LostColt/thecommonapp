@@ -1,4 +1,4 @@
-// DEFINE YOUR LINKS HERE - Ensure 'href' matches your Notion 'Slug' (+ .html)
+// DEFINE LINKS - Ensure these match your Notion Slugs exactly!
 const NAV_ITEMS = [
     { href: 'index.html', label: 'Home', id: 'index' },
     { href: 'mindset.html', label: 'The Mindset Shift', id: 'mindset' },
@@ -23,47 +23,18 @@ function renderSidebar(currentPage) {
     `;
 
     NAV_ITEMS.forEach(item => {
-        const isActive = item.id === currentPage || (item.id === 'index' && currentPage === '');
+        const isActive = item.id === currentPage;
         html += `<li><a href="${item.href}" class="${isActive ? 'active' : ''}">${item.label}</a></li>`;
     });
 
     html += `</ul>`;
     sidebar.innerHTML = html;
-
-    initGlider();
-}
-
-function initGlider() {
-    const navList = document.querySelector('.nav-list');
-    const activeLink = navList?.querySelector('a.active');
-    
-    if (!navList || !activeLink) return;
-
-    let marker = document.createElement('div');
-    marker.classList.add('nav-marker');
-    navList.appendChild(marker);
-
-    function moveMarker(target) {
-        marker.style.top = target.offsetTop + 'px';
-        marker.style.height = target.offsetHeight + 'px';
-    }
-
-    moveMarker(activeLink);
-
-    // Interactive Hover
-    navList.querySelectorAll('a').forEach(link => {
-        link.addEventListener('mouseenter', () => moveMarker(link));
-    });
-    navList.addEventListener('mouseleave', () => moveMarker(activeLink));
-    window.addEventListener('resize', () => moveMarker(activeLink));
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Determine current page based on URL
     var path = window.location.pathname;
     var filename = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
     
-    // Find matching ID
     var current = 'index';
     for (var i = 0; i < NAV_ITEMS.length; i++) {
         if (NAV_ITEMS[i].href === filename) { 
@@ -74,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderSidebar(current);
 
-    // Mobile Menu
+    // Mobile Logic
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const pageWrapper = document.querySelector('.page-wrapper');
     const overlay = document.querySelector('.mobile-overlay');
