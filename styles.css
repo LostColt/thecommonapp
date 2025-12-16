@@ -72,31 +72,25 @@ blockquote { border-left: 4px solid var(--gulliver-blue); padding-left: 1.5rem; 
 img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 figcaption { margin-top: 0.8rem; text-align: center; font-size: 0.9rem; color: #64748B; }
 
-/* --- EMBEDS (THE FIX) --- */
+/* --- EMBEDS (UPDATED FOR 4:3 SLIDES) --- */
 .slide-embed-container {
     position: relative;
     width: 100%;
     
-    /* IMPORTANT: Controls the Shape.
-       Use 56.25% for Widescreen (16:9)
-       Use 75% for Standard (4:3) - TRY THIS if you see black bars on top/bottom
-    */
-    padding-bottom: 56.25%; 
+    /* 75% = Standard 4:3 Ratio (Fixes the black bars) */
+    padding-bottom: 75%; 
     
     height: 0;
     margin: 2.5rem 0;
     border-radius: 12px;
     overflow: hidden;
-    
-    /* FIX: Changed background to White so bars are invisible */
-    background: white; 
-    
+    background: white; /* Hides any remaining bars */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .slide-embed-container iframe { 
     position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; 
-    background: white; /* Forces the player background to be white */
+    background: white;
 }
 
 /* --- MOBILE --- */
