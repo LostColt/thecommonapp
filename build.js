@@ -39,13 +39,11 @@ async function blocksToHtml(blocks) {
   for (const block of blocks) {
     const type = block.type;
 
-    // Handle Lists (Close tags if switching away from list)
     if (type !== 'bulleted_list_item' && type !== 'numbered_list_item' && listType) {
       html += listType === 'ul' ? '</ul>\n' : '</ol>\n';
       listType = null;
     }
 
-    // --- TEXT BLOCKS ---
     if (type === 'paragraph') {
       const text = richTextToHtml(block.paragraph.rich_text);
       if (text) html += `<p>${text}</p>\n`;
@@ -59,8 +57,6 @@ async function blocksToHtml(blocks) {
     else if (type === 'heading_3') {
       html += `<h3>${richTextToHtml(block.heading_3.rich_text)}</h3>\n`;
     }
-    
-    // --- LISTS ---
     else if (type === 'bulleted_list_item') {
       if (listType !== 'ul') { html += '<ul>\n'; listType = 'ul'; }
       html += `<li>${richTextToHtml(block.bulleted_list_item.rich_text)}</li>\n`;
@@ -69,8 +65,6 @@ async function blocksToHtml(blocks) {
       if (listType !== 'ol') { html += '<ol>\n'; listType = 'ol'; }
       html += `<li>${richTextToHtml(block.numbered_list_item.rich_text)}</li>\n`;
     }
-
-    // --- QUOTES & CALLOUTS ---
     else if (type === 'quote') {
       html += `<blockquote>${richTextToHtml(block.quote.rich_text)}</blockquote>\n`;
     } 
@@ -78,18 +72,13 @@ async function blocksToHtml(blocks) {
       const emoji = block.callout.icon ? block.callout.icon.emoji : '💡';
       html += `<div class="callout"><span class="icon">${emoji}</span><div class="callout-content">${richTextToHtml(block.callout.rich_text)}</div></div>\n`;
     }
-
-    // --- IMAGES ---
     else if (type === 'image') {
       const url = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
       const caption = block.image.caption ? richTextToHtml(block.image.caption) : '';
       html += `<figure><img src="${url}" alt="${caption}"><figcaption>${caption}</figcaption></figure>\n`;
     }
-
-    // --- EMBEDS (Google Slides, etc) ---
     else if (type === 'embed') {
         const url = block.embed.url;
-        // Check if it's a Google Slide or similar, wrap it for responsiveness
         html += `<div class="slide-embed-container"><iframe src="${url}" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></div>\n`;
     }
   }
@@ -131,24 +120,39 @@ async function build() {
   const pages = await fetchPages();
 
   if (!fs.existsSync('dist')) fs.mkdirSync('dist');
-
-  // Copy static assets
   fs.copyFileSync('styles.css', 'dist/styles.css');
   fs.copyFileSync('nav.js', 'dist/nav.js');
 
   for (const page of pages) {
     const props = page.properties;
-    const slug = props.Slug?.rich_text[0]?.plain_text;
+    
+    // --- FIX START: Better Slug Handling ---
+    let slug = props.Slug?.rich_text[0]?.plain_text;
+    
+    // 1. If no slug in Notion, skip this page
+    if (!slug) continue;
+    
+    slug = slug.trim();
+
+    // 2. Force "Home" or "index" to become "index.html"
+    if (slug.toLowerCase() === 'home' || slug.toLowerCase() === 'index') {
+        slug = 'index.html';
+    }
+
+    // 3. Ensure every file has the .html extension
+    if (!slug.endsWith('.html')) {
+        slug += '.html';
+    }
+    // --- FIX END ---
+
     const title = props.Page?.title[0]?.plain_text;
     const subtitle = props.Subtitle?.rich_text[0]?.plain_text || '';
     
-    if (slug) {
-      console.log(`Building: ${slug}`);
-      const blocks = await fetchPageContent(page.id);
-      const contentHtml = await blocksToHtml(blocks);
-      const fullHtml = wrapPage(title, subtitle, contentHtml);
-      fs.writeFileSync(`dist/${slug}`, fullHtml);
-    }
+    console.log(`Building: ${slug}`);
+    const blocks = await fetchPageContent(page.id);
+    const contentHtml = await blocksToHtml(blocks);
+    const fullHtml = wrapPage(title, subtitle, contentHtml);
+    fs.writeFileSync(`dist/${slug}`, fullHtml);
   }
   console.log('Build complete!');
 }
