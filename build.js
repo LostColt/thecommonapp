@@ -54,7 +54,7 @@ function richTextToHtml(richText) {
   }).join('');
 }
 
-// 4. Convert Blocks to HTML (The Main Logic)
+// 4. Convert Blocks to HTML
 async function blocksToHtml(blocks) {
   let html = '';
   let listType = null;
@@ -62,13 +62,11 @@ async function blocksToHtml(blocks) {
   for (const block of blocks) {
     const type = block.type;
 
-    // Handle List Closing
     if (type !== 'bulleted_list_item' && type !== 'numbered_list_item' && listType) {
       html += listType === 'ul' ? '</ul>\n' : '</ol>\n';
       listType = null;
     }
 
-    // --- PARAGRAPHS & HEADERS ---
     if (type === 'paragraph') {
       const text = richTextToHtml(block.paragraph.rich_text);
       if (text) html += `<p>${text}</p>\n`;
@@ -77,7 +75,6 @@ async function blocksToHtml(blocks) {
     else if (type === 'heading_2') html += `<h2>${richTextToHtml(block.heading_2.rich_text)}</h2>\n`;
     else if (type === 'heading_3') html += `<h3>${richTextToHtml(block.heading_3.rich_text)}</h3>\n`;
     
-    // --- LISTS ---
     else if (type === 'bulleted_list_item') {
       if (listType !== 'ul') { html += '<ul>\n'; listType = 'ul'; }
       html += `<li>${richTextToHtml(block.bulleted_list_item.rich_text)}</li>\n`;
@@ -87,32 +84,25 @@ async function blocksToHtml(blocks) {
       html += `<li>${richTextToHtml(block.numbered_list_item.rich_text)}</li>\n`;
     }
 
-    // --- QUOTES ---
     else if (type === 'quote') {
       html += `<blockquote>${richTextToHtml(block.quote.rich_text)}</blockquote>\n`;
     } 
 
-    // --- CALLOUTS (With Recursion Fix) ---
     else if (type === 'callout') {
       const emoji = block.callout.icon ? block.callout.icon.emoji : '💡';
       let content = richTextToHtml(block.callout.rich_text);
-      
-      // If there are nested blocks inside the callout, fetch them too
       if (block.children) {
         content += await blocksToHtml(block.children);
       }
-      
       html += `<div class="callout"><span class="icon">${emoji}</span><div class="callout-content">${content}</div></div>\n`;
     }
 
-    // --- IMAGES ---
     else if (type === 'image') {
       const url = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
       const caption = block.image.caption ? richTextToHtml(block.image.caption) : '';
       html += `<figure><img src="${url}" alt="${caption}"><figcaption>${caption}</figcaption></figure>\n`;
     }
 
-    // --- EMBEDS (Google Slides) ---
     else if (type === 'embed') {
         const url = block.embed.url;
         html += `<div class="slide-embed-container"><iframe src="${url}" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></div>\n`;
@@ -123,15 +113,17 @@ async function blocksToHtml(blocks) {
   return html;
 }
 
-// 5. Wrap HTML in the Site Template
-function wrapPage(title, subtitle, content) {
+// 5. Wrap HTML (WITH INJECTED CSS)
+function wrapPage(title, subtitle, content, cssContent) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title} | Gulliver Prep</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+  ${cssContent}
+  </style>
 </head>
 <body>
   <div class="mobile-overlay"></div>
@@ -157,13 +149,15 @@ async function build() {
   const pages = await fetchPages();
 
   if (!fs.existsSync('dist')) fs.mkdirSync('dist');
-  fs.copyFileSync('styles.css', 'dist/styles.css');
+  
+  // READ CSS FILE DIRECTLY
+  const css = fs.readFileSync('styles.css', 'utf-8');
+  
   fs.copyFileSync('nav.js', 'dist/nav.js');
 
   for (const page of pages) {
     const props = page.properties;
     
-    // SMART SLUG LOGIC
     let slug = props.Slug?.rich_text[0]?.plain_text;
     if (!slug) continue;
     slug = slug.trim();
@@ -175,10 +169,11 @@ async function build() {
     
     console.log(`Building: ${slug}`);
     
-    // Fetch content recursively
     const blocks = await fetchPageBlocks(page.id);
     const contentHtml = await blocksToHtml(blocks);
-    const fullHtml = wrapPage(title, subtitle, contentHtml);
+    
+    // PASS CSS TO THE WRAPPER
+    const fullHtml = wrapPage(title, subtitle, contentHtml, css);
     
     fs.writeFileSync(`dist/${slug}`, fullHtml);
   }
