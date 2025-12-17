@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflection // Common App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { brand: { canvas: '#f8fafc', surface: '#ffffff', ink: '#0f172a', inkLight: '#475569', inkMuted: '#94a3b8', primary: '#4f46e5', calm: '#0d9488', warning: '#ef4444' } },
+                    boxShadow: { 'soft': '0 4px 20px -2px rgba(148, 163, 184, 0.15)', 'paper': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }
+                }
+            }
+        }
+    </script>
+    <style>body { background-color: #f8fafc; color: #0f172a; } .sidebar-scroll::-webkit-scrollbar { width: 4px; } .sidebar-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }</style>
+</head>
+<body class="min-h-screen flex">
+
+    <aside class="w-72 bg-brand-surface border-r border-slate-200 h-screen fixed top-0 left-0 z-50 flex flex-col justify-between">
+        <div class="p-8 border-b border-slate-100">
+            <div class="text-xs font-mono font-bold text-brand-primary tracking-widest uppercase mb-2">Kinetic Systems</div>
+            <h1 class="text-xl font-sans font-black tracking-tight text-brand-ink">Common App<span class="text-brand-primary">.</span></h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-1">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-2 text-brand-inkLight hover:text-brand-primary hover:bg-slate-50 rounded-lg transition-colors text-sm group">
+                <i data-lucide="home" class="w-4 h-4 text-brand-inkMuted group-hover:text-brand-primary"></i>
+                <span>The Challenge</span>
+            </a>
+            <div class="pt-6 pb-2 px-4 text-[10px] font-mono font-bold text-brand-inkMuted uppercase tracking-widest">The Process</div>
+            <a href="discovery.html" class="flex items-center gap-3 px-4 py-2 text-brand-inkLight hover:text-brand-primary hover:bg-slate-50 rounded-lg transition-colors text-sm group">
+                <span class="font-mono text-xs text-brand-inkMuted group-hover:text-brand-primary">01</span><span>Discovery</span>
+            </a>
+            <a href="reflection.html" class="flex items-center gap-3 px-4 py-3 bg-brand-canvas text-brand-primary rounded-lg font-medium text-sm border border-slate-200 shadow-sm transition-all">
+                <span class="font-mono text-xs text-brand-primary font-bold">02</span><span>Reflection</span>
+            </a>
+            <a href="final-polish.html" class="flex items-center gap-3 px-4 py-2 text-brand-inkLight hover:text-brand-primary hover:bg-slate-50 rounded-lg transition-colors text-sm group">
+                <span class="font-mono text-xs text-brand-inkMuted group-hover:text-brand-primary">03</span><span>Final Polish</span>
+            </a>
+        </nav>
+        <div class="p-6 border-t border-slate-100 bg-slate-50"><div class="text-[10px] text-brand-inkMuted">Kinetic Systems v2.4</div></div>
+    </aside>
+
+    <main class="ml-72 w-full p-12 md:p-20 max-w-5xl">
+        <div class="flex items-center gap-2 text-xs font-mono text-brand-inkMuted mb-12 uppercase tracking-wider">
+            <span>Phase 02</span><span>/</span><span class="text-brand-primary">Reflection</span>
+        </div>
+        
+        <header class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-black text-brand-ink tracking-tight mb-6">Structuring the Narrative</h1>
+            <p class="text-lg text-brand-inkLight font-light max-w-2xl leading-relaxed">
+                Turn your brain-dump into a story. Use these "moves" to elevate your draft from a report to a narrative.
+            </p>
+        </header>
+
+        <div class="bg-red-50 border border-red-100 rounded-xl p-6 mb-12 flex gap-4">
+            <i data-lucide="alert-triangle" class="text-red-500 w-6 h-6 shrink-0"></i>
+            <div>
+                <h3 class="font-bold text-red-900 text-sm">Avoid the Chronological Trap</h3>
+                <p class="text-xs text-red-800 mt-1">Do not write "I did this, then I did that." Focus on the <strong>moment of change</strong>.</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200">
+                <h3 class="font-bold text-brand-ink mb-2">01. The Freeze Frame</h3>
+                <p class="text-sm text-brand-inkLight">Stop time. Describe one moment in sensory detail.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-200">
+                <h3 class="font-bold text-brand-ink mb-2">02. The Insight</h3>
+                <p class="text-sm text-brand-inkLight">Explicitly state what you learned. Don't make the reader guess.</p>
+            </div>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

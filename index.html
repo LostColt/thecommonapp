@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common App Resource // Kinetic Systems</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            canvas: '#f8fafc', surface: '#ffffff', ink: '#0f172a',
+                            inkLight: '#475569', inkMuted: '#94a3b8',
+                            primary: '#4f46e5', calm: '#0d9488', warmth: '#f59e0b',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(148, 163, 184, 0.15)',
+                        'paper': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8fafc; color: #0f172a; }
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .grid-guide {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="grid-guide min-h-screen flex">
+
+    <aside class="w-72 bg-brand-surface border-r border-slate-200 h-screen fixed top-0 left-0 z-50 flex flex-col justify-between">
+        
+        <div class="p-8 border-b border-slate-100">
+            <div class="text-xs font-mono font-bold text-brand-primary tracking-widest uppercase mb-2">Kinetic Systems</div>
+            <h1 class="text-xl font-sans font-black tracking-tight text-brand-ink">Common App<span class="text-brand-primary">.</span></h1>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-1">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 bg-brand-canvas text-brand-primary rounded-lg font-medium text-sm border border-slate-200 shadow-sm transition-all">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                <span>The Challenge</span>
+            </a>
+
+            <div class="pt-6 pb-2 px-4 text-[10px] font-mono font-bold text-brand-inkMuted uppercase tracking-widest">The Process</div>
+            
+            <a href="discovery.html" class="flex items-center gap-3 px-4 py-2 text-brand-inkLight hover:text-brand-primary hover:bg-slate-50 rounded-lg transition-colors text-sm group">
+                <span class="font-mono text-xs text-brand-inkMuted group-hover:text-brand-primary">01</span>
+                <span>Discovery</span>
+            </a>
+            
+            <a href="reflection.html" class="flex items-center gap-3 px-4 py-2 text-brand-inkLight hover:text-brand-primary hover:bg-slate-50 rounded-lg transition-colors text-sm group">
+                <span class="font-mono text-xs text-brand-inkMuted group-hover:text-brand-primary">02</span>
+                <span>Reflection</span>
+            </a>
+            
+            <a href="final-polish.html" class="flex items-center gap-3 px-4 py-2 text-brand-inkLight hover:text-brand-primary hover:bg-slate-50 rounded-lg transition-colors text-sm group">
+                <span class="font-mono text-xs text-brand-inkMuted group-hover:text-brand-primary">03</span>
+                <span>Final Polish</span>
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-slate-100 bg-slate-50">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-white font-mono text-xs">DT</div>
+                <div class="text-xs">
+                    <div class="font-bold text-brand-ink">David Tran</div>
+                    <div class="text-brand-inkMuted">Project Lead</div>
+                </div>
+            </div>
+            <p class="text-[10px] text-brand-inkMuted leading-relaxed">
+                Kinetic Master Brand v4.0<br/>Common App Module
+            </p>
+        </div>
+    </aside>
+
+    <main class="ml-72 w-full p-12 md:p-20 max-w-5xl">
+        
+        <div class="flex items-center gap-2 text-xs font-mono text-brand-inkMuted mb-12 uppercase tracking-wider">
+            <span>Documentation</span>
+            <span>/</span>
+            <span class="text-brand-primary">Overview</span>
+        </div>
+
+        <header class="mb-16">
+            <h1 class="text-5xl md:text-6xl font-black text-brand-ink tracking-tight mb-6">
+                The Personal <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-calm">Statement</span>
+            </h1>
+            <p class="text-xl text-brand-inkLight font-light max-w-2xl leading-relaxed">
+                One essay. 650 words. Sent to every college on your list.
+                This is the centerpiece of your application.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 gap-12">
+            
+            <section class="bg-white p-10 rounded-xl shadow-paper border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-brand-primary"></div>
+                
+                <h2 class="font-sans text-2xl font-bold text-brand-ink mb-6 flex items-center gap-3">
+                    <i data-lucide="scale" class="text-brand-primary"></i>
+                    The Constraints
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-bold text-sm text-brand-ink uppercase tracking-wide mb-2">The Limit</h3>
+                        <p class="text-brand-inkLight text-sm leading-relaxed">
+                            <strong>650 words maximum.</strong> There is no leeway. The form will cut you off. You must be concise, impactful, and devoid of fluff.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-brand-ink uppercase tracking-wide mb-2">The Goal</h3>
+                        <p class="text-brand-inkLight text-sm leading-relaxed">
+                            This is not a resume. This is a <strong>personal narrative</strong>. Admissions officers want to know who you are when you aren't in class.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 bg-indigo-50 p-6 rounded-lg border border-indigo-100 flex gap-4">
+                    <i data-lucide="info" class="text-brand-primary shrink-0 mt-1"></i>
+                    <p class="text-sm text-brand-inkLight">
+                        <strong>Note:</strong> We are ignoring supplemental essays for now. We are focusing strictly on the main Personal Statement. If you master this, the rest is easy.
+                    </p>
+                </div>
+            </section>
+            
+            <div class="flex justify-end mt-8">
+                <a href="discovery.html" class="group flex items-center gap-2 text-brand-ink font-bold hover:text-brand-primary transition-colors">
+                    Begin Phase 01: Discovery
+                    <i data-lucide="arrow-right" class="w-5 h-5 transition-transform group-hover:translate-x-1"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
